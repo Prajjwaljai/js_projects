@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Call App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  
+  <!-- Form Section (Initially Hidden) -->
+  <div class="form-container hidden ">
+      <h2>New Call</h2>
+      <form>
+          <label for="image-url">Image URL</label>
+          <input required id="image-url" type="text" placeholder="https://example.com/photo.jpg">
+
+          <label for="full-name">Full Name</label>
+          <input required id="full-name" type="text" placeholder="Enter full name">
+
+          <label for="home-town">Home Town</label>
+          <input required id="home-town" type="text" placeholder="Enter home town">
+
+          <label for="purpose">Purpose</label>
+          <input required id="purpose" type="text" placeholder="e.g., Quick appointment note">
+
+        <label>Category</label>
+        <div class="category-options">
+            <label class="tag-radio black">
+                <input required type="radio" name="category" value="emergency"> Emergency
+            </label>
+            <label class="tag-radio purple">
+                <input required type="radio" name="category" value="important"> Important
+            </label>
+            <label class="tag-radio orange">
+                <input required type="radio" name="category" value="urgent"> Urgent
+            </label>
+            <label class="tag-radio teal">
+                <input required type="radio" name="category" value="no-rush"> No Rush
+            </label>
+        </div>
+
+
+        <button type="submit" class="submit-btn">Create Note</button>
+      </form>
+      <button type="button" class="closeForm">Close</button>
+  </div>
+
+  <!-- Notes Section -->
+  <div class="note-container">
+      <!-- Left Controls -->
+      <div class="left-icons">
+          <button id="add-note">+</button>
+          <button id="prev-card">↑</button>
+          <button id="next-card">↓</button>
+      </div>
+
+      <!-- Card Stack -->
+      <div class="stack">
+          <div class="card">
+              <img class="avatar" src="data:image/jpeg;base64,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" alt="Profile picture">
+              <h3 class="name">Fatima Uma</h3>
+              <div class="info-row">
+                  <span>Home town</span>
+                  <span>Singapore</span>
+              </div>
+              <div class="info-row">
+                  <span>Bookings</span>
+                  <span>3 times</span>
+              </div>
+              <div class="card-actions">
+                  <button class="call-btn">
+                        <i class="ri-phone-line"></i> Call
+                  </button>
+                  <button class="message-btn">Message</button>
+              </div>
+          </div>
+
+          <div class="card">
+              <img class="avatar" src="https://in.pinterest.com/pin/6403624465445950/" alt="Profile picture">
+              <h3 class="name">John Doe</h3>
+              <div class="info-row">
+                  <span>Home town</span>
+                  <span>New York</span>
+              </div>
+              <div class="info-row">
+                  <span>Bookings</span>
+                  <span>5 times</span>
+              </div>
+              <div class="card-actions">
+                  <button class="call-btn">
+                        <i class="ri-phone-line"></i> Call
+                  </button>
+                  <button class="message-btn">Message</button>
+              </div>
+          </div>
+
+          <div class="card">
+              <img class="avatar" src="https://example.com/user3.jpg" alt="Profile picture">
+              <h3 class="name">Aisha Khan</h3>
+              <div class="info-row">
+                  <span>Home town</span>
+                  <span>Dubai</span>
+              </div>
+              <div class="info-row">
+                  <span>Bookings</span>
+                  <span>2 times</span>
+              </div>
+              <div class="card-actions">
+                  <button class="call-btn">
+                        <i class="ri-phone-line"></i> Call
+                  </button>
+                  <button class="message-btn">Message</button>
+              </div>
+          </div>
+      </div>
+
+      <!-- Right Dots -->
+      <div class="right-icons">
+          <span class="dot black"></span>
+          <span class="dot purple"></span>
+          <span class="dot orange"></span>
+          <span class="dot teal"></span>
+      </div>
+  </div>
+    <!-- Message Modal -->
+    <div id="message-modal" class="modal hidden">
+    <div class="modal-content">
+        <h3>Send Message</h3>
+        <textarea id="message-text" placeholder="Type your message here..."></textarea>
+        <div class="modal-actions">
+        <button id="save-message">Save</button>
+        <button id="cancel-message">Cancel</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Call Modal -->
+    <div id="call-modal" class="modal hidden">
+    <div class="modal-content">
+        <h3 id="call-status">Calling...</h3>
+        <p id="call-timer">00:00</p>
+        <div class="modal-actions">
+        <button id="end-call">Hang Up</button>
+        </div>
+    </div>
+    </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

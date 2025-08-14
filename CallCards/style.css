@@ -1,0 +1,411 @@
+/* Import Remix Icon (so <i class="ri-..."> works) */
+@import url('https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css');
+
+/* -------- Reset & Base -------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;       /* vertical center */
+  justify-content: center;   /* horizontal center */
+  padding: 40px;
+  gap: 48px;
+  background: #f5f6f7;
+  color: #111;
+}
+
+/* Utility */
+.hidden { display: none !important; }
+
+/* -------- Form Styling -------- */
+.form-container {
+  width: 340px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  transition: transform 0.28s ease, opacity 0.28s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-container h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.form-container label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px;
+  display: block;
+  color: #333;
+}
+
+.form-container input[type="text"],
+.form-container input[type="url"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e9;
+  margin-top: 6px;
+  outline: none;
+  font-size: 14px;
+  background: #fbfbfb;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.form-container input:focus {
+  border-color: #cfcfe0;
+  box-shadow: 0 6px 16px rgba(100, 100, 125, 0.06);
+}
+
+.category-options {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tag-radio {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  background: #fff;
+  padding: 2px ; 
+  margin-top: 2px;
+  /* border-radius: 8px;
+  border: 1px solid #ccc; */
+  cursor: pointer;
+  width: 100%; /* optional, makes each radio container fill the form width */
+
+}
+
+.tag-radio input[type="radio"] {
+  accent-color: #0b0b0b; /* black fill when selected */
+}
+
+.tag-radio.black  { color: #111; }
+.tag-radio.purple { color: #8b5cf6; }
+.tag-radio.orange { color: #fb923c; }
+.tag-radio.teal   { color: #14b8a6; }
+
+/* Buttons inside form */
+.submit-btn, .closeForm {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background: #0b0b0b;
+  color: #fff;
+}
+
+.closeForm {
+  background: #ef5350;
+  color: #fff;
+}
+
+/* -------- Notes / Cards Layout -------- */
+.note-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  /* optional: keep content centered within a max width */
+  max-width: 420px;
+}
+
+/* Left control buttons (plus, up, down) */
+.left-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.left-icons button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+
+.left-icons button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(17, 24, 39, 0.08);
+}
+
+/* Icon inside buttons */
+.left-icons i, .call-btn i, .message-btn i {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Right dots (color palette) */
+.right-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(14,20,35,0.06);
+  cursor: pointer;
+}
+
+.dot.black  { background: #111; }
+.dot.purple { background: #8b5cf6; }
+.dot.orange { background: #fb923c; }
+.dot.teal   { background: #14b8a6; }
+
+/* -------- Card Stack (centered) -------- */
+.stack {
+  position: relative;
+  width: 300px;
+  height: 240px; /* container height = card height */
+  display: block;
+  perspective: 900px;
+}
+
+.stack .card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 18px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 9px 28px rgba(17, 24, 39, 0.06);
+  transition: transform .32s cubic-bezier(.2,.9,.2,1), opacity .28s ease, box-shadow .28s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* give slight offsets so a 3-card stack is visible by default */
+.stack .card:nth-child(1) {
+  transform: translateY(0px) scale(1);
+  z-index: 3;
+  opacity: 1;
+}
+
+.stack .card:nth-child(2) {
+  transform: translateY(14px) scale(.985);
+  z-index: 2;
+  opacity: 0.98;
+}
+
+.stack .card:nth-child(3) {
+  transform: translateY(28px) scale(.97);
+  z-index: 1;
+  opacity: 0.95;
+}
+
+/* if more cards exist, hide them under stack */
+.stack .card:nth-child(n+4) {
+  transform: translateY(36px) scale(.96);
+  opacity: 0.9;
+  z-index: 0;
+}
+
+/* Card content */
+.card .avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  float: left;               /* avatar to left like your screenshot */
+  margin-right: 12px;
+  border: 3px solid rgba(0,0,0,0.04);
+}
+
+/* Name + info tuning */
+.card .name {
+  display: block;
+  font-weight: 800;
+  font-size: 18px;
+  margin-top: 16px; /* gives room when avatar floats */
+  margin-left: 2px; /* small offset so text doesn't stick to avatar */
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  font-size: 14px;
+  margin-top: 11px;
+  width: 100%;
+}
+
+.card-actions {
+  margin-top: auto; /* push actions to bottom */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* action buttons */
+.message-btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.call-btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0b0b0b;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(11,11,11,0.08);
+}
+
+.message-btn {
+  background: #f0f1f3;
+  color: #111;
+}
+
+/* small responsive tweaks */
+@media (max-width: 920px) {
+  body {
+    padding: 28px;
+    gap: 18px;
+    flex-direction: column;
+  }
+
+  .note-container {
+    max-width: 360px;
+  }
+
+  .form-container {
+  
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .stack {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+/*msg*/
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-content h3 {
+  margin-bottom: 4px;
+}
+
+.modal-content textarea {
+  min-height: 100px;
+  resize: none;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#save-message {
+  background: #0b0b0b;
+  color: #fff;
+}
+
+#cancel-message {
+  background: #ef5350;
+  color: #fff;
+}
+
+#call-timer {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#end-call {
+  background: #ef5350;
+  color: #fff;
+}
+
+/* Blur background when modal is active */
+.blur {
+  filter: blur(5px);
+  pointer-events: none;
+}
